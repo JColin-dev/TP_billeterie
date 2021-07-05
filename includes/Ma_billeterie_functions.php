@@ -340,18 +340,18 @@ function update_billet($order) {
         
     }
 
-        if($order) {
+        
             $reste = $list_event->nb_places_reste - $item['quantity'];
             global $wpdb;
             $table = $wpdb->prefix . 'billet';
 
-            $update = $wpdb->prepare("UPDATE $table 
+            $wpdb->query($wpdb->prepare("UPDATE $table 
             SET nb_places_reste = %d
             WHERE prod_id = %d", 
             $item['product_id'],
             $reste
-        );
-    }
+        ));
+    
 }
 
 add_action('woocommerce_order_status_processing', 'update_billet', 10, 1);
